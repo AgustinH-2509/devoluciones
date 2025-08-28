@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Iconos de Font Awesome para el botón de colapsar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Contenedor principal del dashboard (Flexbox) */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Estilos de la barra lateral (sidebar) */
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            color: #1e3a5f;
+            transition: width 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex-shrink: 0; /* Evita que el sidebar se encoja */
+        }
+        
+        /* Estado colapsado del sidebar */
+        .sidebar.collapsed {
+            width: 60px;
+        }
+
+        /* Estilos del header del sidebar */
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #e0e7ee;
+        }
+
+        .sidebar.collapsed .sidebar-header {
+            justify-content: center;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Título del header en estado colapsado */
+        .sidebar.collapsed .sidebar-header h2 {
+            display: none;
+        }
+
+        /* Botón de colapsar */
+        .collapse-btn {
+            background: none;
+            border: none;
+            color: #3b5981;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Rotación del botón en estado colapsado */
+        .sidebar.collapsed .collapse-btn {
+            transform: rotate(180deg);
+        }
+
+        /* Estilos de navegación del sidebar */
+        .sidebar-nav {
+            list-style: none;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            padding: 0;
+            margin: 0;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-nav li:hover {
+            background-color: #f5f8fa;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #555;
+            transition: color 0.2s;
+        }
+        
+        .sidebar-nav a:hover {
+            color: #3498db;
+        }
+
+        .sidebar-nav a i {
+            width: 20px;
+            font-size: 1.1rem;
+            margin-right: 15px;
+        }
+
+        /* Ocultar texto de los enlaces en estado colapsado */
+        .sidebar.collapsed .sidebar-nav .nav-text {
+            display: none;
+        }
+        
+        .sidebar.collapsed .sidebar-nav a {
+             justify-content: center;
+        }
+        
+        .sidebar.collapsed .sidebar-nav a i {
+            margin: 0;
+        }
+
+        /* Estilos para el submenú (Devoluciones) */
+        .submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #fafbfd;
+        }
+
+        .submenu li a {
+            padding: 10px 20px 10px 55px; /* Indentación del submenú */
+            font-size: 0.95rem;
+        }
+        
+        /* Ocultar submenú en estado colapsado */
+        .sidebar.collapsed .submenu {
+            display: none;
+        }
+
+        /* Estilos del área principal de contenido */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content h1 {
+            color: #1e3a5f;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .main-content p {
+            line-height: 1.6;
+        }
+
+        /* Estilos del formulario de devolución */
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-container h2 {
+            margin-top: 0;
+            color: #1e3a5f;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #3b5981;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #c9d6de;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #e0e7ee;
+            color: #555;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c9d6de;
+        }
+
+    </style>
+    <div class="dashboard-container">
+        <!-- Barra lateral colapsable -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+                <button id="collapse-btn" class="collapse-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#" id="link-inicio">
+                        <i class="fas fa-home"></i><span class="nav-text">Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="has-submenu">
+                        <i class="fas fa-undo-alt"></i><span class="nav-text">Devoluciones</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" id="link-nueva-devolucion"><span class="nav-text">Nueva devolución</span></a></li>
+                        <li><a href="#"><span class="nav-text">Informes</span></a></li>
+                        <li><a href="#"><span class="nav-text">Devoluciones</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-cog"></i><span class="nav-text">Configuración</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Área principal de contenido que se actualizará dinámicamente -->
+        <div class="main-content" id="main-content">
+            <h1>Bienvenido al Dashboard</h1>
+            <p>Este es el área principal de contenido. La barra lateral de la izquierda puede colapsarse y expandirse haciendo clic en el icono de las tres barras en la esquina superior izquierda.</p>
+        </div>
+    </div>
+
+    <!-- Script para la funcionalidad de colapsar la barra lateral y cargar contenido -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const collapseBtn = document.getElementById('collapse-btn');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const linkNuevaDevolucion = document.getElementById('link-nueva-devolucion');
+            const linkInicio = document.getElementById('link-inicio');
+
+            // Función para colapsar/expandir la barra lateral
+            collapseBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+
+            // HTML para la página de "Nueva devolución"
+            const nuevaDevolucionHTML = `
+                <div class="form-container">
+                    <h2>Nueva Devolución</h2>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="producto">Producto:</label>
+                            <input type="text" id="producto" name="producto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cliente">Cliente:</label>
+                            <input type="text" id="cliente" name="cliente" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="motivo">Motivo:</label>
+                            <textarea id="motivo" name="motivo" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha de Devolución:</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('main-content').innerHTML = inicioHTML;">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Devolución</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            // HTML para la página de "Inicio"
+            const inicioHTML = `
+                <h1>Bienvenido al Dashboard</h1>
+                <p>Este es el área principal de contenido. La barra lateral de la izquierda puede colapsarse y expandirse haciendo clic en el icono de las tres barras en la esquina superior izquierda.</p>
+            `;
+
+            // Evento para cargar el formulario de "Nueva devolución"
+            linkNuevaDevolucion.addEventListener('click', (e) => {
+                e.preventDefault();
+                mainContent.innerHTML = nuevaDevolucionHTML;
+            });
+            
+            // Evento para volver a la página de "Inicio"
+            linkInicio.addEventListener('click', (e) => {
+                e.preventDefault();
+                mainContent.innerHTML = inicioHTML;
+            });
+        });
+    </script>
+</body>
+</html>
