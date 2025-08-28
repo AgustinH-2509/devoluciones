@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales y tipografía */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* Contenedor principal del formulario */
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Estilos para los títulos */
+        h1 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* Estilos para los campos de entrada */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3b5981;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #c9d6de;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Estilos para el botón de envío */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ingreso</h1>
+
+        <!-- El formulario ahora dirige a la página del dashboard -->
+        <form action="dashboard.html" method="post">
+            <div class="form-group">
+                <label for="nombre">Usuario:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu usuario" >
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Contraseña:</label>
+                <input type="password" id="email" name="email" placeholder="Contraseña" >
+            </div>
+            
+            <button href="dashboard.html" >Enviar</button>
+        </form>
+    </div>
+
+</body>
+</html>
