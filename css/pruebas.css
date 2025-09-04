@@ -1,0 +1,172 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    background-color: #16537e;
+    transition: width 0.3s;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height:50px ;
+    padding-left: 10px;
+    color: #fff;
+    flex-shrink: 0;
+    background-color:#0c2c43 ;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.sidebar-title {
+    font-size: 17px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilos para la sección de usuario */
+.user-profile {
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+    background-color: #0c2c43;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.user-name {
+    font-weight: bold;
+}
+/* Estilos para el contenido que hace scroll */
+.sidebar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-content::-webkit-scrollbar{
+    width: 0px;
+}
+
+
+/* Estilos de navegación y enlaces */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    gap: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar .description {
+    font-size: 16px;
+    color: #fff;
+}
+
+.sidebar .icon {
+    font-size: 16px;
+    color: #fff;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #9fc5e8;
+    color: #16537e;
+}
+
+.sidebar .sub-menu {
+    background-color: #0e3653;
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar .sub-menu .nav-link {
+    padding-left: 20px;
+}
+
+/* Clases para el colapso */
+.sidebar-collapsed {
+    width: 60px;
+}
+
+.sidebar-collapsed .sidebar-title,
+.sidebar-collapsed .description,
+.sidebar-collapsed .user-details {
+    display: none;
+}
+
+.sidebar-collapsed .user-profile {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-collapsed .nav-link {
+    justify-content: center;
+}
+
+/* Media query para pantallas pequeñas (lo mismo que el colapso) */
+@media(max-width:400px){
+    .sidebar {
+        width: 60px;
+    }
+    .sidebar .description {
+        display: none;
+    }
+    .sidebar .nav-link {
+        justify-content: center;
+    }
+
+    .user-profile .user-details{
+        display: none;
+    }
+
+    .sidebar .sidebar-title{
+        display: none;
+    }
+
+}   
+
+.main-content {
+    height: 100%;
+    margin-left: 220px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+.main-content-expanded {
+    margin-left: 50px;
+}
+      
+.content-section {
+            display: none;
+        }
+        
+.content-section.active {
+            display: block;
+        }

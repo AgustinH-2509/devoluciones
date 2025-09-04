@@ -1,0 +1,112 @@
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 200px;
+            padding-top: 20px;
+            background-color: #16537e;
+            transition: width 0.3s;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .sidebar .description {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .sidebar .icon {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #9fc5e8;
+            color: #16537e;
+        }
+
+        .sidebar .sub-menu {
+            background-color: #0e3653;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .sidebar .sub-menu .nav-link {
+            padding: left 10px;; /* Indenta el submenú */
+        }
+        
+        .main-content {
+            height: 100%;
+            margin-left: 200px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        
+        /* Clases para el colapso */
+        .sidebar-collapsed {
+            width: 60px;
+        }
+        
+        .sidebar-collapsed .sidebar-title,
+        .sidebar-collapsed .description,
+        .sidebar-collapsed .sub-menu {
+            display: none;
+        }
+        
+        .sidebar-collapsed .nav-link {
+            justify-content: center;
+        }
+
+        .main-content-expanded {
+            margin-left: 60px;
+        }
+        
+        /* Media query para pantallas pequeñas (lo mismo que el colapso) */
+        @media(max-width:400px){
+            .sidebar {
+                width: 60px;
+            }
+            .sidebar .description {
+                display: none;
+            }
+            .sidebar .nav-link {
+                justify-content: center;
+            }
+            .main-content {
+                margin-left: 60px;
+            }
+        }
+
