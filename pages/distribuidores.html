@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <h1 class="mt-4">Gestión de Distribuidores</h1>
+    <p>Administra los distribuidores de la compañía.</p>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="card-title mb-0">Distribuidores Habilitados</h5>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDistributorModal">
+            <i class="bi bi-person-plus-fill me-2"></i>Agregar Nuevo Distribuidor
+        </button>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Codigo </th>
+                            <th>Nombre </th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Estado</th>
+                            <th>Acciones</th> </tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>D-001</td>
+                            <td>Distribuidora Alpha</td>
+                            <td>+54 9 11 1234-5678</td>
+                            <td>alpha@example.com</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#distributorModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger disable-btn">
+                                    <i class="bi bi-person-slash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>D-002</td>
+                            <td>Comercializadora Beta</td>
+                            <td>+54 9 11 8765-4321</td>
+                            <td>beta@example.com</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                                                        <td>
+                                <button class="btn btn-sm btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#distributorModal">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger disable-btn">
+                                    <i class="bi bi-person-slash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addDistributorModal" tabindex="-1" aria-labelledby="addDistributorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDistributorModalLabel">Agregar Nuevo Distribuidor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-distributor-form">
+                    <div class="mb-3">
+                        <label for="distributor-name" class="form-label">Codigo de Distribuidor:</label>
+                        <input type="text" class="form-control" id="distributor-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="distributor-name" class="form-label">Nombre del Distribuidor:</label>
+                        <input type="text" class="form-control" id="distributor-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="distributor-phone" class="form-label">Teléfono:</label>
+                        <input type="tel" class="form-control" id="distributor-phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="distributor-email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="distributor-email">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" form="add-distributor-form">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
